@@ -35,6 +35,41 @@ app.use(session({
     }
 }));
 
+pp.set('trust proxy', 1);
+
+if (!process.env.SESSION_SECRET) {
+    throw new Error('SESSION_SECRET environment variable is required');
+}
+
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: true,
+        maxAge: 3600000,
+        sameSite: 'lax'
+    }
+}));
+
+app.set('trust proxy', 1);
+
+if(!process.env.SESSION_SECRET){
+  throw new Error('SESSION_SECRET environment variable is required');
+}
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: true,
+        maxAge: 3600000,
+        sameSite: 'lax'
+    }
+}));
+
 // =====================================
 // PAGE ROUTES
 // =====================================
