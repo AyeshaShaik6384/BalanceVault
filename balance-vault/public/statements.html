@@ -1,0 +1,410 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BalanceVault — Account Statements</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#f7f8f5] flex min-h-screen">
+
+    <!-- SIDEBAR -->
+    <aside class="w-[204px] bg-[#163b30] text-white flex flex-col min-h-screen shrink-0">
+
+        <div class="px-4 pt-6">
+
+            <!-- LOGO -->
+            <div class="flex items-center gap-2 mb-10">
+                <div class="w-7 h-7 rounded-lg bg-[#e8f0e9] text-[#164535] flex items-center justify-center font-bold text-lg">
+                    b
+                </div>
+                <span class="font-bold text-sm tracking-tight">balancevault</span>
+            </div>
+
+            <!-- NAVIGATION -->
+            <p class="text-[9px] uppercase tracking-[2px] text-[#9bb8aa] font-semibold mb-4 px-1">
+                Workspace
+            </p>
+
+            <nav class="space-y-1.5 text-xs">
+
+                <a href="/dashboard.html"
+                   class="flex items-center gap-3 px-3 py-3 rounded-lg text-gray-300 hover:bg-white/10 transition">
+
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="7" height="7" rx="1"/>
+                        <rect x="14" y="3" width="7" height="7" rx="1"/>
+                        <rect x="3" y="14" width="7" height="7" rx="1"/>
+                        <rect x="14" y="14" width="7" height="7" rx="1"/>
+                    </svg>
+
+                    Overview
+                </a>
+
+
+                <a href="/accounts.html"
+                   class="flex items-center justify-between px-3 py-3 rounded-lg text-gray-300 hover:bg-white/10 transition">
+
+                    <span class="flex items-center gap-3">
+
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <rect x="3" y="5" width="18" height="14" rx="2"/>
+                            <path d="M3 10h18M7 15h3"/>
+                        </svg>
+
+                        Accounts
+
+                    </span>
+
+                    <span>›</span>
+                </a>
+
+
+                <!-- ACTIVE STATEMENTS -->
+                <a href="/statements.html"
+                   class="flex items-center gap-3 px-3 py-3 rounded-lg bg-white/10 border-l-2 border-[#b6c99c] font-medium text-white">
+
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path d="M3 12h3l3-8 5 16 3-8h4"/>
+                    </svg>
+
+                    Statements
+                </a>
+
+
+                <a href="/account-request.html"
+                   class="flex items-center gap-3 px-3 py-3 rounded-lg text-gray-300 hover:bg-white/10 transition">
+
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 5v14M5 12h14"/>
+                    </svg>
+
+                    Account request
+                </a>
+
+            </nav>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 min-w-0 overflow-y-auto">
+
+        <!-- TOP HEADER -->
+        <header class="h-[60px] bg-[#fcfcfa] border-b border-gray-200 flex justify-between items-center px-6 md:px-10">
+
+            <!-- BREADCRUMB -->
+            <div class="flex items-center gap-3 text-[10px]">
+
+                <span class="text-gray-400">Workspace</span>
+
+                <span class="text-gray-300">/</span>
+
+                <span class="font-semibold text-gray-600">Statements</span>
+
+            </div>
+
+
+            <!-- RIGHT HEADER -->
+            <div class="flex items-center gap-4 md:gap-6">
+
+                <!-- SYSTEM STATUS -->
+                <div class="hidden sm:flex items-center gap-2 text-[9px] text-gray-500">
+
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#66a879]"></span>
+
+                    Systems operational
+
+                </div>
+
+
+                <div class="h-7 border-l border-gray-200"></div>
+
+
+                <!-- USER PROFILE -->
+                <div class="relative">
+
+                    <button id="profile-btn" class="flex items-center gap-2">
+
+                        <div class="w-7 h-7 rounded-full bg-[#e7eee7] border border-[#d7e3d8] flex items-center justify-center text-xs text-[#416b50]">
+                            S
+                        </div>
+
+                        <div class="text-left">
+
+                            <p id="user-name" class="text-[10px] font-semibold text-gray-700">
+                                Shaik
+                            </p>
+
+                            <p class="text-[8px] text-gray-400">
+                                Account holder
+                            </p>
+
+                        </div>
+
+                        <span class="text-gray-500 text-xs">⌄</span>
+
+                    </button>
+
+
+                    <!-- PROFILE DROPDOWN -->
+                    <div id="profile-menu"
+                         class="hidden absolute right-0 top-10 bg-white border border-gray-200 rounded-lg shadow-lg w-36 z-20">
+
+                        <button id="logout-btn"
+                                class="w-full text-left px-4 py-3 text-xs text-red-600 hover:bg-gray-50 rounded-lg">
+
+                            Sign out
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- PAGE CONTENT -->
+        <section class="px-6 md:px-10 py-10 max-w-[1100px] mx-auto">
+
+            <!-- SECTION LABEL -->
+            <p class="text-[9px] uppercase tracking-[2px] font-semibold text-[#8b9c91] mb-3">
+                Ledger
+            </p>
+
+
+            <!-- PAGE TITLE -->
+            <h1 class="text-3xl md:text-[32px] font-serif text-[#173d30] mb-2">
+                Account statements
+            </h1>
+
+
+            <p class="text-[10px] text-gray-500 mb-7">
+                Posted entries and recorded refusals in the order supplied by the ledger.
+            </p>
+
+
+            <!-- STATEMENTS CONTENT -->
+            <div id="statements-container">
+
+                <!-- EMPTY STATE -->
+                <div id="empty-state"
+                     class="min-h-[110px] bg-[#fcfcfa] border border-dashed border-[#d7ded7] rounded-lg flex flex-col items-center justify-center text-center px-4 py-6">
+
+                    <p class="text-[10px] font-semibold text-gray-700 mb-1">
+                        No accounts available
+                    </p>
+
+                    <p class="text-[8px] text-gray-400">
+                        Statements are available for accounts you can view.
+                    </p>
+
+                </div>
+
+
+                <!-- STATEMENTS TABLE -->
+                <div id="table-container"
+                     class="hidden bg-white rounded-xl border border-gray-200 shadow-sm overflow-x-auto">
+
+                    <table class="w-full text-left text-sm text-gray-600">
+
+                        <thead class="bg-gray-50 text-[10px] uppercase font-semibold text-gray-500 border-b">
+
+                            <tr>
+
+                                <th class="px-6 py-4">Account</th>
+
+                                <th class="px-6 py-4">Type</th>
+
+                                <th class="px-6 py-4">Amount</th>
+
+                                <th class="px-6 py-4">Audit Hash</th>
+
+                                <th class="px-6 py-4">Timestamp</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="statements-list" class="divide-y divide-gray-200">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- JAVASCRIPT -->
+    <script>
+
+        // LOAD USER AND STATEMENTS
+        async function loadStatements() {
+
+            try {
+
+                // Check logged-in user
+                const meRes = await fetch('/api/auth/me');
+
+                if (!meRes.ok) {
+
+                    window.location.href = '/index.html';
+                    return;
+
+                }
+
+                const user = await meRes.json();
+
+                document.getElementById('user-name').textContent =
+                    user.fullname || user.name || 'User';
+
+
+                // Fetch statements
+                const res = await fetch('/api/statements');
+
+                if (!res.ok) {
+
+                    throw new Error('Unable to fetch statements');
+
+                }
+
+                const data = await res.json();
+
+
+                const container =
+                    document.getElementById('statements-list');
+
+                const emptyState =
+                    document.getElementById('empty-state');
+
+                const tableContainer =
+                    document.getElementById('table-container');
+
+
+                // EMPTY STATE
+                if (!Array.isArray(data) || data.length === 0) {
+
+                    emptyState.classList.remove('hidden');
+                    tableContainer.classList.add('hidden');
+
+                    return;
+
+                }
+
+
+                // SHOW STATEMENTS
+                emptyState.classList.add('hidden');
+                tableContainer.classList.remove('hidden');
+
+
+                container.innerHTML = data.map(item => `
+
+                    <tr class="hover:bg-gray-50 transition">
+
+                        <td class="px-6 py-4 font-medium text-gray-900">
+                            ${item.account_number || 'N/A'}
+                        </td>
+
+
+                        <td class="px-6 py-4 font-semibold text-emerald-700">
+                            ${item.type || 'N/A'}
+                        </td>
+
+
+                        <td class="px-6 py-4 font-serif text-gray-900">
+                            ₹${Number(item.amount || 0).toFixed(2)}
+                        </td>
+
+
+                        <td class="px-6 py-4 font-mono text-xs text-gray-400 truncate max-w-xs"
+                            title="${item.hash || ''}">
+
+                            ${item.hash || 'N/A'}
+
+                        </td>
+
+
+                        <td class="px-6 py-4 text-xs text-gray-500">
+
+                            ${item.timestamp
+                                ? new Date(item.timestamp).toLocaleString()
+                                : 'N/A'}
+
+                        </td>
+
+                    </tr>
+
+                `).join('');
+
+
+            } catch (error) {
+
+                console.error('Error loading statements:', error);
+
+                document.getElementById('statements-container').innerHTML = `
+
+                    <div class="p-8 text-center bg-white border border-red-200 rounded-xl text-red-500 text-xs">
+
+                        Unable to load statements. Please try again later.
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        // PROFILE DROPDOWN
+        document.getElementById('profile-btn')
+            .addEventListener('click', () => {
+
+                document.getElementById('profile-menu')
+                    .classList.toggle('hidden');
+
+            });
+
+
+        // LOGOUT
+        document.getElementById('logout-btn')
+            .addEventListener('click', async () => {
+
+                try {
+
+                    await fetch('/api/auth/logout', {
+                        method: 'POST'
+                    });
+
+                    window.location.href = '/index.html';
+
+                } catch (error) {
+
+                    console.error('Logout failed:', error);
+
+                }
+
+            });
+
+
+        // INITIALIZE
+        loadStatements();
+
+    </script>
+
+</body>
+</html>

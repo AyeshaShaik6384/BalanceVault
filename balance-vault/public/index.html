@@ -1,0 +1,856 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BalanceVault — Sign in</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #f8faf9;
+            min-height: 100vh;
+            color: #102e24;
+        }
+
+        .page {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 63.5% 36.5%;
+        }
+
+        /* LEFT PANEL */
+
+        .left-panel {
+            background:
+                radial-gradient(ellipse at 15% 20%, rgba(65, 116, 91, .28), transparent 45%),
+                radial-gradient(ellipse at 85% 85%, rgba(35, 104, 78, .28), transparent 40%),
+                linear-gradient(145deg, #153e32, #10372d 65%, #123b30);
+            color: #f3f5eb;
+            padding: 44px 10.5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+        }
+
+        .brand-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 19px;
+            font-weight: 800;
+            letter-spacing: -.6px;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+            background: #edf1e5;
+            color: #174536;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 31px;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .brand-icon::after {
+            content: "";
+            width: 6px;
+            height: 6px;
+            background: #a9c77e;
+            border-radius: 50%;
+            position: absolute;
+            bottom: -9px;
+        }
+
+        .secure-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: #e0e9e2;
+            white-space: nowrap;
+        }
+
+        .secure-dot {
+            width: 9px;
+            height: 9px;
+            background: #9bd4ae;
+            border-radius: 50%;
+            box-shadow: 0 0 0 6px rgba(155, 212, 174, .12);
+        }
+
+        /* HERO */
+
+        .hero {
+            margin-top: 55px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .eyebrow {
+            color: #b8d5bd;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(52px, 6vw, 82px);
+            line-height: 1.06;
+            letter-spacing: -3px;
+            font-weight: 500;
+            max-width: 650px;
+            margin-bottom: 28px;
+        }
+
+        .hero h1 em {
+            color: #bfd3a7;
+            font-weight: 500;
+        }
+
+        .hero-description {
+            font-size: 17px;
+            line-height: 1.85;
+            color: #d5e2dd;
+            max-width: 510px;
+        }
+
+        /* LEDGER ILLUSTRATION */
+
+        .illustration {
+            position: relative;
+            height: 285px;
+            max-width: 560px;
+            margin-top: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .orbit {
+            position: absolute;
+            width: 450px;
+            height: 245px;
+            border: 1px solid rgba(177, 210, 179, .19);
+            border-radius: 50%;
+            transform: rotate(12deg);
+        }
+
+        .orbit-two {
+            position: absolute;
+            width: 390px;
+            height: 210px;
+            border: 1px solid rgba(177, 210, 179, .15);
+            border-radius: 50%;
+            transform: rotate(-17deg);
+        }
+
+        .ledger-card {
+            position: relative;
+            width: 350px;
+            height: 210px;
+            border-radius: 19px;
+            background: linear-gradient(135deg, #dce8cd, #b8cdaa);
+            transform: rotate(-7deg);
+            padding: 27px;
+            color: #456e5e;
+            box-shadow: 0 25px 65px rgba(0, 0, 0, .18);
+            z-index: 1;
+        }
+
+        .ledger-top {
+            font-size: 9px;
+            letter-spacing: 2px;
+            font-weight: 800;
+        }
+
+        .ledger-status {
+            position: absolute;
+            top: 27px;
+            right: 28px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #85a989;
+        }
+
+        .ledger-lines {
+            margin-top: 42px;
+        }
+
+        .ledger-lines span {
+            display: block;
+            height: 5px;
+            border-radius: 10px;
+            background: rgba(83, 125, 98, .29);
+            margin-bottom: 10px;
+        }
+
+        .ledger-lines span:nth-child(1) {
+            width: 45%;
+        }
+
+        .ledger-lines span:nth-child(2) {
+            width: 75%;
+        }
+
+        .ledger-lines span:nth-child(3) {
+            width: 60%;
+        }
+
+        .ledger-bottom {
+            position: absolute;
+            left: 27px;
+            bottom: 23px;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+        }
+
+        .ledger-shield {
+            position: absolute;
+            right: 27px;
+            bottom: 23px;
+            font-size: 23px;
+        }
+
+        .floating-badge {
+            position: absolute;
+            z-index: 3;
+            background: rgba(26, 72, 57, .94);
+            border: 1px solid rgba(195, 221, 196, .2);
+            color: #f0f5ed;
+            padding: 13px 16px;
+            border-radius: 13px;
+            font-size: 12px;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, .12);
+            white-space: nowrap;
+        }
+
+        .badge-top {
+            top: 10px;
+            right: 8px;
+        }
+
+        .badge-bottom {
+            bottom: 5px;
+            left: 8px;
+        }
+
+        .badge-number {
+            color: #c6dcab;
+            font-weight: 800;
+            margin-right: 8px;
+        }
+
+        .badge-check {
+            display: inline-flex;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #b9d3a5;
+            color: #174533;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            margin-right: 8px;
+        }
+
+        .left-footer {
+            border-top: 1px solid rgba(218, 237, 220, .18);
+            height: 1px;
+            width: 100%;
+        }
+
+        /* RIGHT PANEL */
+
+        .right-panel {
+            background: #fbfcfa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 55px 45px;
+            min-height: 100vh;
+        }
+
+        .login-content {
+            width: 100%;
+            max-width: 365px;
+        }
+
+        .welcome {
+            color: #56806e;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+        }
+
+        .login-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 43px;
+            font-weight: 500;
+            line-height: 1.2;
+            letter-spacing: -1.5px;
+            color: #12382c;
+            margin-bottom: 17px;
+        }
+
+        .subtitle {
+            font-size: 15px;
+            color: #82908b;
+            margin-bottom: 43px;
+        }
+
+        .form-group {
+            margin-bottom: 27px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #294c3e;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .form-group input {
+            width: 100%;
+            height: 60px;
+            border: 1px solid #dce4df;
+            border-radius: 12px;
+            padding: 0 18px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            color: #183e30;
+            background: #eaf1ff;
+            outline: none;
+            transition: .2s;
+        }
+
+        .form-group input:focus {
+            border-color: #507c67;
+            box-shadow: 0 0 0 3px rgba(67, 119, 91, .1);
+        }
+
+        .form-group input::placeholder {
+            color: #9aa8a1;
+        }
+
+        .submit-btn {
+            width: 100%;
+            height: 60px;
+            border: none;
+            border-radius: 12px;
+            background: #205744;
+            color: white;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .25s;
+            box-shadow: 0 12px 25px rgba(32, 87, 68, .12);
+        }
+
+        .submit-btn:hover {
+            background: #174634;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            opacity: .7;
+            cursor: wait;
+            transform: none;
+        }
+
+        .toggle-area {
+            text-align: center;
+            font-size: 13px;
+            color: #89958f;
+            margin-top: 37px;
+        }
+
+        .toggle-btn {
+            border: none;
+            background: none;
+            color: #174b38;
+            font-family: inherit;
+            font-weight: 800;
+            font-size: 13px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        .toggle-btn:hover {
+            text-decoration: underline;
+        }
+
+        .error-box {
+            display: none;
+            padding: 13px 15px;
+            border-radius: 10px;
+            font-size: 13px;
+            margin-bottom: 22px;
+            line-height: 1.5;
+        }
+
+        .error-box.error {
+            display: block;
+            background: #fff0ef;
+            border: 1px solid #f4d1ce;
+            color: #a53d36;
+        }
+
+        .error-box.success {
+            display: block;
+            background: #eaf7ee;
+            border: 1px solid #c8e6d0;
+            color: #277044;
+        }
+
+        .security-note {
+            border-top: 1px solid #e9eeea;
+            margin-top: 49px;
+            padding-top: 27px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            color: #94a39a;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .lock-icon {
+            color: #638c74;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1100px) {
+            .page {
+                grid-template-columns: 58% 42%;
+            }
+
+            .left-panel {
+                padding: 40px 8%;
+            }
+
+            .hero h1 {
+                font-size: 58px;
+            }
+
+            .right-panel {
+                padding: 40px 30px;
+            }
+
+            .login-content h2 {
+                font-size: 36px;
+            }
+
+            .ledger-card {
+                width: 300px;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .page {
+                display: block;
+            }
+
+            .left-panel {
+                display: none;
+            }
+
+            .right-panel {
+                min-height: 100vh;
+                padding: 45px 25px;
+            }
+
+            .login-content {
+                max-width: 420px;
+            }
+
+            .login-content h2 {
+                font-size: 38px;
+            }
+
+            .subtitle {
+                margin-bottom: 35px;
+            }
+
+            .security-note {
+                margin-top: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- LEFT SIDE -->
+    <section class="left-panel">
+
+        <div class="brand-row">
+
+            <div class="brand">
+                <div class="brand-icon">b</div>
+                <span>balancevault</span>
+            </div>
+
+            <div class="secure-label">
+                <span class="secure-dot"></span>
+                Secure ledger platform
+            </div>
+
+        </div>
+
+        <div class="hero">
+
+            <div class="eyebrow">Money, accounted for.</div>
+
+            <h1>
+                Confidence in<br>
+                every<br>
+                <em>transaction.</em>
+            </h1>
+
+            <p class="hero-description">
+                A clearer view of your accounts, built on a ledger where every entry has its place.
+            </p>
+
+            <!-- Decorative ledger illustration -->
+
+            <div class="illustration">
+
+                <div class="orbit"></div>
+                <div class="orbit-two"></div>
+
+                <div class="ledger-card">
+
+                    <div class="ledger-top">
+                        BV / PRIVATE LEDGER
+                    </div>
+
+                    <div class="ledger-status"></div>
+
+                    <div class="ledger-lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <div class="ledger-bottom">
+                        SECURE BY DESIGN
+                    </div>
+
+                    <div class="ledger-shield">♢</div>
+
+                </div>
+
+                <div class="floating-badge badge-top">
+                    <span class="badge-number">01</span>
+                    Verified access
+                </div>
+
+                <div class="floating-badge badge-bottom">
+                    <span class="badge-check">✓</span>
+                    Every entry accountable
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="left-footer"></div>
+
+    </section>
+
+
+    <!-- RIGHT SIDE -->
+    <section class="right-panel">
+
+        <div class="login-content">
+
+            <div class="welcome" id="welcome-text">
+                WELCOME BACK
+            </div>
+
+            <h2 id="form-title">
+                Sign in to your vault
+            </h2>
+
+            <p class="subtitle" id="form-subtitle">
+                Your accounts, clearly in view.
+            </p>
+
+            <div id="error-box" class="error-box"></div>
+
+            <form id="auth-form">
+
+                <div class="form-group hidden" id="name-field">
+                    <label for="fullname">Full name</label>
+                    <input
+                        type="text"
+                        id="fullname"
+                        placeholder="Your full name"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="shaik@example.com"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="••••••••••••"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="submit-btn" id="submit-btn">
+                    Sign in
+                </button>
+
+            </form>
+
+            <div class="toggle-area">
+
+                <span id="toggle-text">
+                    New to BalanceVault?
+                </span>
+
+                <button type="button" class="toggle-btn" id="toggle-mode">
+                    Create an account
+                </button>
+
+            </div>
+
+            <div class="security-note">
+
+                <span class="lock-icon">♧</span>
+
+                <p>
+                    Your connection is protected. We never display
+                    your private information after signing in.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<script>
+
+    let isLogin = true;
+
+    const form = document.getElementById('auth-form');
+    const toggleBtn = document.getElementById('toggle-mode');
+
+    const formTitle = document.getElementById('form-title');
+    const formSubtitle = document.getElementById('form-subtitle');
+    const nameField = document.getElementById('name-field');
+
+    const submitBtn = document.getElementById('submit-btn');
+    const toggleText = document.getElementById('toggle-text');
+    const errorBox = document.getElementById('error-box');
+
+    const welcomeText = document.getElementById('welcome-text');
+
+    // Switch between login and registration
+
+    toggleBtn.addEventListener('click', () => {
+
+        isLogin = !isLogin;
+
+        errorBox.className = 'error-box';
+        errorBox.textContent = '';
+
+        if (isLogin) {
+
+            formTitle.textContent = 'Sign in to your vault';
+
+            formSubtitle.textContent =
+                'Your accounts, clearly in view.';
+
+            welcomeText.textContent = 'WELCOME BACK';
+
+            nameField.classList.add('hidden');
+
+            document.getElementById('fullname').required = false;
+
+            submitBtn.textContent = 'Sign in';
+
+            toggleText.textContent =
+                'New to BalanceVault?';
+
+            toggleBtn.textContent =
+                'Create an account';
+
+        } else {
+
+            formTitle.textContent = 'Create your vault';
+
+            formSubtitle.textContent =
+                'Start managing your finances securely.';
+
+            welcomeText.textContent = 'GET STARTED';
+
+            nameField.classList.remove('hidden');
+
+            document.getElementById('fullname').required = true;
+
+            submitBtn.textContent = 'Create account';
+
+            toggleText.textContent =
+                'Already have an account?';
+
+            toggleBtn.textContent = 'Sign in';
+
+        }
+
+    });
+
+
+    // Authentication
+
+    form.addEventListener('submit', async (e) => {
+
+        e.preventDefault();
+
+        errorBox.className = 'error-box';
+        errorBox.textContent = '';
+
+        const email =
+            document.getElementById('email').value.trim();
+
+        const password =
+            document.getElementById('password').value;
+
+        const fullname =
+            document.getElementById('fullname').value.trim();
+
+        const endpoint = isLogin
+            ? '/api/auth/login'
+            : '/api/auth/register';
+
+        const payload = isLogin
+            ? { email, password }
+            : { fullname, email, password };
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Please wait...';
+
+        try {
+
+            const res = await fetch(endpoint, {
+
+                method: 'POST',
+
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+
+                body: JSON.stringify(payload)
+
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                throw new Error(
+                    data.error || 'Authentication failed'
+                );
+            }
+
+            if (isLogin) {
+
+                window.location.href = '/dashboard.html';
+
+            } else {
+
+                errorBox.textContent =
+                    'Registration successful! Please sign in.';
+
+                errorBox.className = 'error-box success';
+
+                form.reset();
+
+                setTimeout(() => {
+
+                    toggleBtn.click();
+
+                }, 1500);
+
+            }
+
+        } catch (err) {
+
+            errorBox.textContent = err.message;
+
+            errorBox.className = 'error-box error';
+
+        } finally {
+
+            submitBtn.disabled = false;
+
+            submitBtn.textContent = isLogin
+                ? 'Sign in'
+                : 'Create account';
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>

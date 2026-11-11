@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BalanceVault — Deposit</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap"
+          rel="stylesheet">
+
+    <!-- Deposit Page CSS -->
+    <link rel="stylesheet" href="/money.css">
+</head>
+
+<body data-mode="deposit">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div>
+
+            <!-- BRAND -->
+            <div class="brand">
+                <div class="brand-mark">b</div>
+                <span class="brand-name">balancevault</span>
+            </div>
+
+            <!-- NAVIGATION LABEL -->
+            <div class="nav-label">Workspace</div>
+
+            <!-- NAVIGATION LINKS -->
+            <nav class="nav">
+
+                <!-- Overview -->
+                <a href="/dashboard.html">
+
+                    <svg fill="none" stroke="currentColor"
+                         stroke-width="1.8" viewBox="0 0 24 24">
+
+                        <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+                        <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+                        <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+                        <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+
+                    </svg>
+
+                    <span>Overview</span>
+
+                </a>
+
+
+                <!-- Accounts -->
+                <a href="/accounts.html">
+
+                    <svg fill="none" stroke="currentColor"
+                         stroke-width="1.8" viewBox="0 0 24 24">
+
+                        <rect x="2" y="5" width="20" height="14" rx="2"/>
+                        <line x1="2" y1="10" x2="22" y2="10"/>
+
+                    </svg>
+
+                    <span>Accounts</span>
+
+                    <svg class="chev" fill="none"
+                         stroke="currentColor" stroke-width="2"
+                         viewBox="0 0 24 24">
+
+                        <path d="m9 6 6 6-6 6"/>
+
+                    </svg>
+
+                </a>
+
+
+                <!-- Statements -->
+                <a href="/statements.html">
+
+                    <svg fill="none" stroke="currentColor"
+                         stroke-width="1.8" viewBox="0 0 24 24">
+
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+
+                    </svg>
+
+                    <span>Statements</span>
+
+                </a>
+
+
+                <!-- Account Request -->
+                <a href="/account-request.html">
+
+                    <svg fill="none" stroke="currentColor"
+                         stroke-width="1.8" viewBox="0 0 24 24">
+
+                        <line x1="12" y1="5" x2="12" y2="19"/>
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+
+                    </svg>
+
+                    <span>Account request</span>
+
+                </a>
+
+            </nav>
+
+        </div>
+
+
+        <!-- SIDEBAR FOOTER -->
+        <div>
+
+            <div class="ledger-card">
+
+                <div class="ico">
+
+                    <svg width="13" height="13"
+                         fill="none" stroke="currentColor"
+                         stroke-width="1.8" viewBox="0 0 24 24">
+
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+
+                    </svg>
+
+                </div>
+
+                <div>
+
+                    <div class="t">Protected ledger</div>
+                    <div class="s">Secure by design</div>
+
+                </div>
+
+                <svg class="tick" width="13" height="13"
+                     fill="none" stroke="currentColor"
+                     stroke-width="2.2" viewBox="0 0 24 24">
+
+                    <path d="M20 6 9 17l-5-5"/>
+
+                </svg>
+
+            </div>
+
+            <div class="sidebar-foot">
+                Balancevault &nbsp;•&nbsp; Private
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <div class="main">
+
+
+        <!-- TOP HEADER -->
+        <header class="topbar">
+
+            <!-- BREADCRUMB -->
+            <div class="crumbs">
+
+                Workspace
+
+                <span class="sep">/</span>
+
+                <b>Deposit</b>
+
+            </div>
+
+
+            <!-- HEADER RIGHT -->
+            <div class="top-right">
+
+                <!-- SYSTEM STATUS -->
+                <div class="status">
+
+                    <i></i>
+
+                    <span>Systems operational</span>
+
+                </div>
+
+
+                <div class="vline"></div>
+
+
+                <!-- USER PROFILE -->
+                <div class="user">
+
+                    <button type="button"
+                            class="user-btn"
+                            id="user-menu-btn"
+                            onclick="toggleDropdown()">
+
+                        <span class="avatar" id="user-initial-badge">
+                            S
+                        </span>
+
+                        <span class="user-meta">
+
+                            <div class="n" id="user-display-name">
+                                shaik
+                            </div>
+
+                            <div class="r">
+                                Account holder
+                            </div>
+
+                        </span>
+
+                        <svg fill="none" stroke="currentColor"
+                             stroke-width="2" viewBox="0 0 24 24">
+
+                            <path d="m6 9 6 6 6-6"/>
+
+                        </svg>
+
+                    </button>
+
+
+                    <!-- PROFILE DROPDOWN -->
+                    <div class="dropdown" id="user-dropdown">
+
+                        <a href="/settings.html">
+                            Profile
+                        </a>
+
+                        <a href="/settings.html">
+                            Security
+                        </a>
+
+                        <a href="/settings.html">
+                            Settings
+                        </a>
+
+                        <hr>
+
+                        <button type="button" id="dropdown-logout">
+                            Sign out
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- DEPOSIT PAGE -->
+        <main class="content">
+
+
+            <!-- BACK TO OVERVIEW -->
+            <a href="/dashboard.html" class="back">
+
+                <svg fill="none" stroke="currentColor"
+                     stroke-width="2" viewBox="0 0 24 24">
+
+                    <path d="M19 12H5M11 6l-6 6 6 6"/>
+
+                </svg>
+
+                Back to overview
+
+            </a>
+
+
+            <!-- PAGE HEADING -->
+            <div class="eyebrow">
+                Secure money movement
+            </div>
+
+            <h1 class="page-title">
+                Deposit
+            </h1>
+
+            <p class="page-sub">
+                Add funds to an eligible account.
+            </p>
+
+
+            <!-- DEPOSIT FORM / ACCOUNT CONTENT -->
+            <div id="money-root">
+
+                <!-- Content is populated by money.js -->
+
+            </div>
+
+
+            <!-- SECURITY FOOTNOTE -->
+            <div class="footnote">
+
+                <i></i>
+
+                <span>
+                    No balance is changed in the browser.
+                    The backend authorizes each request,
+                    enforces idempotency, and confirms ledger postings.
+                </span>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- DEPOSIT PAGE JAVASCRIPT -->
+    <script src="/money.js"></script>
+
+</body>
+</html>

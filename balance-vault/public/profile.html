@@ -1,0 +1,666 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BalanceVault — Profile</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #f5f7f4;
+    color: #17382c;
+}
+
+.sidebar {
+    width: 184px;
+    min-height: 100vh;
+    background: #163b30;
+    color: white;
+    padding: 22px 16px;
+    flex-shrink: 0;
+}
+
+.brand {
+    font-weight: 700;
+    font-size: 17px;
+    margin-bottom: 45px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.brand-icon {
+    width: 27px;
+    height: 27px;
+    border-radius: 8px;
+    background: #e7eee6;
+    color: #163b30;
+    display: grid;
+    place-items: center;
+    font-family: Georgia, serif;
+    font-size: 19px;
+}
+
+.nav-label {
+    color: #85b3a0;
+    text-transform: uppercase;
+    font-size: 9px;
+    letter-spacing: 1px;
+    margin-bottom: 18px;
+}
+
+.nav a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: #d2ded8;
+    text-decoration: none;
+    font-size: 12px;
+    padding: 13px 14px;
+    border-radius: 9px;
+    margin-bottom: 5px;
+}
+
+.nav a svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 1.7;
+    flex-shrink: 0;
+}
+
+.nav a .nav-arrow {
+    width: 13px;
+    height: 13px;
+    margin-left: auto;
+}
+
+.nav a:hover,
+.nav a.active {
+    background: #285345;
+    color: white;
+}
+
+.main {
+    flex: 1;
+    min-width: 0;
+}
+
+.topbar {
+    height: 60px;
+    background: white;
+    border-bottom: 1px solid #e5e9e4;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+}
+
+.crumb {
+    font-size: 10px;
+    color: #839087;
+}
+
+.crumb b {
+    color: #344a3d;
+}
+
+.user-area {
+    position: relative;
+}
+
+.user-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+.avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #e7eee6;
+    display: grid;
+    place-items: center;
+    color: #315744;
+    font-weight: 600;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 42px;
+    width: 155px;
+    background: white;
+    border: 1px solid #e1e8e0;
+    border-radius: 9px;
+    box-shadow: 0 8px 25px #0001;
+    z-index: 5;
+    padding: 7px;
+}
+
+.dropdown.show {
+    display: block;
+}
+
+.dropdown a,
+.dropdown button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+    font-size: 11px;
+    text-decoration: none;
+    color: #294337;
+    background: white;
+    border: 0;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.dropdown a:hover,
+.dropdown button:hover {
+    background: #f1f5f0;
+}
+
+.content {
+    max-width: 650px;
+    margin: 65px auto;
+    padding: 0 20px;
+}
+
+.eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    color: #829b8b;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-family: 'Newsreader', serif;
+    font-size: 36px;
+    font-weight: 400;
+    margin: 10px 0 5px;
+    color: #17382c;
+}
+
+.subtitle {
+    font-family: 'Inter', sans-serif;
+    color: #819087;
+    font-size: 10px;
+    font-weight: 400;
+    margin-bottom: 28px;
+}
+
+.panel {
+    background: white;
+    border: 1px solid #e0e7df;
+    border-radius: 13px;
+    padding: 25px 20px;
+}
+
+.field-group {
+    margin-bottom: 17px;
+}
+
+label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    color: #344a3d;
+    margin-bottom: 9px;
+}
+
+
+input {
+    width: 100%;
+    padding: 15px 13px;
+    border: 1px solid #dce5dc;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    color: #17382c;
+    outline: none;
+    background: white;
+}
+
+input:focus {
+    border-color: #285b49;
+}
+
+input[readonly] {
+    background: white;
+    color: #17382c;
+}
+
+.primary {
+    width: 100%;
+    background: #205343;
+    color: white;
+    border: 0;
+    padding: 16px;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.primary:hover {
+    background: #163b30;
+}
+
+.primary:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+.secondary {
+    width: 100%;
+    background: white;
+    color: #285344;
+    border: 1px solid #dce5dc;
+    padding: 12px;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 14px;
+}
+
+.secondary:hover {
+    background: #f5f7f4;
+}
+
+.message {
+    font-size: 12px;
+    margin-top: 13px;
+}
+
+@media(max-width:650px) {
+    .sidebar {
+        width: 65px;
+        padding: 15px 5px;
+    }
+
+    .brand {
+        font-size: 0;
+        justify-content: center;
+    }
+
+    .brand-icon {
+        font-size: 19px;
+    }
+
+    .nav-label {
+        display: none;
+    }
+
+    .nav a {
+        justify-content: center;
+        padding: 13px 5px;
+    }
+
+    .nav a span,
+    .nav-arrow {
+        display: none;
+    }
+
+    .topbar {
+        padding: 0 12px;
+    }
+
+    .content {
+        margin: 35px auto;
+    }
+
+    /* ORIGINAL BALANCEVAULT TYPOGRAPHY */
+
+body,
+button,
+input,
+textarea,
+select {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Main page heading */
+h1 {
+    font-family: 'Newsreader', serif;
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    color: #17382c;
+}
+
+/* Small section heading */
+.eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+/* Description */
+.subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+}
+
+/* Form labels */
+label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+/* Form values */
+input {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+/* Buttons */
+.primary {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.secondary {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+}
+
+/* Sidebar */
+.nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Breadcrumb */
+.crumb {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+}
+
+}
+</style>
+</head>
+
+<body class="flex">
+
+<aside class="sidebar">
+
+    <div class="brand">
+        <span class="brand-icon">b</span>
+        <span>balancevault</span>
+    </div>
+
+    <div class="nav-label">Workspace</div>
+
+    <nav class="nav">
+
+        <a href="/dashboard.html">
+            <i data-lucide="layout-grid"></i>
+            <span>Overview</span>
+        </a>
+
+        <a href="/accounts.html">
+            <i data-lucide="credit-card"></i>
+            <span>Accounts</span>
+            <i data-lucide="chevron-right" class="nav-arrow"></i>
+        </a>
+
+        <a href="/statements.html">
+            <i data-lucide="activity"></i>
+            <span>Statements</span>
+        </a>
+
+        <a href="/account-request.html">
+            <i data-lucide="plus"></i>
+            <span>Account request</span>
+        </a>
+
+    </nav>
+</aside>
+
+<div class="main">
+
+    <header class="topbar">
+
+        <div class="crumb">
+            Workspace &nbsp; / &nbsp; <b>Overview</b>
+        </div>
+
+        <div class="user-area">
+
+            <button class="user-btn" onclick="toggleDropdown()">
+
+                <span class="avatar" id="avatar">S</span>
+
+                <span style="text-align:left;font-size:11px">
+                    <b id="header-name">Account holder</b><br>
+                    <span style="color:#87958b">Account holder</span>
+                </span>
+
+                <i data-lucide="chevron-down" width="14"></i>
+
+            </button>
+
+            <div class="dropdown" id="dropdown">
+                <a href="/profile.html">Profile</a>
+                <a href="/settings.html">Settings</a>
+                <a href="/security.html">Security</a>
+                <button onclick="logout()">Sign out</button>
+            </div>
+
+        </div>
+
+    </header>
+
+    <main class="content">
+
+        <div class="eyebrow">Your account</div>
+
+        <h1>Profile</h1>
+
+        <p class="subtitle">
+            Review and update your personal details.
+        </p>
+
+        <section class="panel">
+
+            <form id="profile-form">
+
+                <div class="field-group">
+                    <label for="fullname">Full name</label>
+                    <input type="text" id="fullname" required maxlength="100">
+                </div>
+
+                <div class="field-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required maxlength="150">
+                </div>
+
+                <div class="field-group">
+                    <label for="role">Role</label>
+                    <input type="text" id="role" readonly>
+                </div>
+
+                <div class="field-group">
+                    <label for="status">Account status</label>
+                    <input type="text" id="status" readonly>
+                </div>
+
+                <div class="field-group">
+                    <label for="member-since">Member since</label>
+                    <input type="text" id="member-since" readonly>
+                </div>
+
+                <button type="submit" class="primary" id="save-btn">
+                    Save changes
+                </button>
+
+                <p id="message" class="message"></p>
+
+            </form>
+
+            <button class="secondary"
+                onclick="location.href='/security.html'">
+                Security settings
+            </button>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script>
+
+function toggleDropdown() {
+    document.getElementById('dropdown').classList.toggle('show');
+}
+
+async function loadProfile() {
+
+    const message = document.getElementById('message');
+
+    try {
+
+        const res = await fetch('/api/auth/me');
+
+        if (!res.ok) {
+            location.href = '/index.html';
+            return;
+        }
+
+        const user = await res.json();
+
+        document.getElementById('fullname').value =
+            user.fullname || '';
+
+        document.getElementById('email').value =
+            user.email || '';
+
+        document.getElementById('role').value =
+            user.role || 'Account holder';
+
+        document.getElementById('status').value =
+            user.status || 'Active';
+
+        document.getElementById('member-since').value =
+            user.created_at
+                ? new Date(user.created_at).toLocaleString()
+                : '';
+
+        document.getElementById('header-name').textContent =
+            user.fullname || 'Account holder';
+
+        document.getElementById('avatar').textContent =
+            (user.fullname || 'S').charAt(0).toUpperCase();
+
+        message.style.color = 'green';
+        message.textContent = 'Profile loaded successfully.';
+
+    } catch (error) {
+
+        message.style.color = 'red';
+        message.textContent = 'Unable to load profile.';
+
+        console.error(error);
+    }
+}
+
+document.getElementById('profile-form')
+.addEventListener('submit', async (e) => {
+
+    e.preventDefault();
+
+    const button = document.getElementById('save-btn');
+    const message = document.getElementById('message');
+
+    button.disabled = true;
+    button.textContent = 'Saving...';
+
+    try {
+
+        const res = await fetch('/api/auth/profile', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                fullname: document.getElementById('fullname').value.trim(),
+                email: document.getElementById('email').value.trim()
+            })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            throw new Error(data.error || 'Profile update failed.');
+        }
+
+        message.style.color = 'green';
+        message.textContent = 'Profile updated successfully!';
+
+        await loadProfile();
+
+    } catch (error) {
+
+        message.style.color = 'red';
+        message.textContent = error.message;
+
+    } finally {
+
+        button.disabled = false;
+        button.textContent = 'Save changes';
+    }
+
+});
+
+async function logout() {
+
+    try {
+        await fetch('/api/auth/logout', {
+            method: 'POST'
+        });
+    } finally {
+        location.href = '/index.html';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    lucide.createIcons();
+    loadProfile();
+});
+
+</script>
+
+</body>
+</html>

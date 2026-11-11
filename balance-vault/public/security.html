@@ -1,0 +1,520 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BalanceVault — Security</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: Inter, sans-serif;
+    background: #f5f7f4;
+}
+
+.sidebar {
+    width: 244px;
+    min-height: 100vh;
+    background: #163b30;
+    color: white;
+    padding: 22px 16px;
+    flex-shrink: 0;
+}
+
+.brand {
+    font-weight: 700;
+    font-size: 17px;
+    margin-bottom: 45px;
+}
+
+.nav-label {
+    color: #85b3a0;
+    text-transform: uppercase;
+    font-size: 9px;
+    letter-spacing: 1px;
+    margin-bottom: 18px;
+    padding-left: 12px;
+}
+
+.nav a {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    color: #d2ded8;
+    text-decoration: none;
+    font-size: 12px;
+    padding: 13px 12px;
+    border-radius: 7px;
+    margin-bottom: 5px;
+}
+
+.nav a:hover,
+.nav a.active {
+    background: #285345;
+    color: white;
+}
+
+.nav-icon {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+}
+
+.main {
+    flex: 1;
+    min-width: 0;
+}
+
+.topbar {
+    height: 55px;
+    background: white;
+    border-bottom: 1px solid #e5e9e4;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+}
+
+.crumb {
+    font-size: 10px;
+    color: #839087;
+}
+
+.user-area {
+    position: relative;
+}
+
+.user-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+.avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #e7eee6;
+    display: grid;
+    place-items: center;
+    color: #315744;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 38px;
+    width: 145px;
+    background: white;
+    border: 1px solid #e1e8e0;
+    border-radius: 9px;
+    box-shadow: 0 8px 25px #0001;
+    z-index: 5;
+    padding: 7px;
+}
+
+.dropdown.show {
+    display: block;
+}
+
+.dropdown a,
+.dropdown button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+    font-size: 11px;
+    text-decoration: none;
+    color: #294337;
+    background: white;
+    border: 0;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.dropdown a:hover,
+.dropdown button:hover {
+    background: #f1f5f0;
+}
+
+.content {
+    max-width: 660px;
+    margin: 55px auto;
+    padding: 0 20px;
+}
+
+.eyebrow {
+    font-size: 9px;
+    letter-spacing: 1.4px;
+    color: #829b8b;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-family: Newsreader, serif;
+    font-size: 32px;
+    margin: 10px 0 5px;
+    color: #17382c;
+}
+
+.subtitle {
+    color: #819087;
+    font-size: 11px;
+    margin-bottom: 25px;
+}
+
+.panel {
+    background: white;
+    border: 1px solid #e0e7df;
+    border-radius: 11px;
+    padding: 22px 20px 20px;
+}
+
+.field-group {
+    margin-bottom: 16px;
+}
+
+label {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    color: #344a3d;
+    margin-bottom: 8px;
+}
+
+input {
+    width: 100%;
+    height: 48px;
+    padding: 11px;
+    border: 1px solid #dce5dc;
+    border-radius: 7px;
+    font-size: 12px;
+    outline: none;
+}
+
+input:focus {
+    border-color: #285b49;
+}
+
+.primary {
+    width: 100%;
+    background: #205343;
+    color: white;
+    border: 0;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 11px;
+    cursor: pointer;
+    margin-top: 0;
+}
+
+.primary:hover {
+    background: #163f32;
+}
+
+.primary:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+.message {
+    font-size: 11px;
+    margin-top: 12px;
+}
+
+@media(max-width:650px) {
+    .sidebar {
+        width: 65px;
+        padding: 15px 5px;
+    }
+
+    .brand {
+        font-size: 10px;
+    }
+
+    .nav-label {
+        display: none;
+    }
+
+    .nav a {
+        font-size: 0;
+        justify-content: center;
+    }
+
+    .topbar {
+        padding: 0 12px;
+    }
+
+    .content {
+        margin: 35px auto;
+    }
+}
+</style>
+</head>
+
+<body class="flex">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+    <div class="brand">▣ balancevault</div>
+
+    <div class="nav-label">Workspace</div>
+
+    <nav class="nav">
+
+        <a href="/dashboard.html">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="3" y="3" width="7" height="7" rx="1"/>
+                <rect x="14" y="3" width="7" height="7" rx="1"/>
+                <rect x="3" y="14" width="7" height="7" rx="1"/>
+                <rect x="14" y="14" width="7" height="7" rx="1"/>
+            </svg>
+            Overview
+        </a>
+
+        <a href="/accounts.html">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="2.5" y="4" width="19" height="16" rx="2"/>
+                <path d="M2.5 9h19"/>
+            </svg>
+            Accounts
+            <span style="margin-left:auto;color:#85b3a0">›</span>
+        </a>
+
+        <a href="/statements.html">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M2 12h4l3-8 5 16 3-8h5"/>
+            </svg>
+            Statements
+        </a>
+
+        <a href="/account-request.html">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M12 5v14M5 12h14"/>
+            </svg>
+            Account request
+        </a>
+
+    </nav>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+
+    <header class="topbar">
+
+        <div class="crumb">
+            Workspace &nbsp; / &nbsp; <b>Overview</b>
+        </div>
+
+        <div class="user-area">
+
+            <button class="user-btn" onclick="toggleDropdown()">
+
+                <span class="avatar" id="avatar">S</span>
+
+                <span style="text-align:left;font-size:10px">
+                    <b id="header-name">Account holder</b><br>
+                    <span style="color:#87958b">Account holder</span>
+                </span>
+
+                <span>⌄</span>
+
+            </button>
+
+            <div class="dropdown" id="dropdown">
+                <a href="/profile">Profile</a>
+                <a href="/settings">Settings</a>
+                <a href="/settings/security">Security</a>
+                <button onclick="logout()">Sign out</button>
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- SECURITY CONTENT -->
+    <main class="content">
+
+        <div class="eyebrow">Account security</div>
+
+        <h1>Security</h1>
+
+        <p class="subtitle">
+            Changing your password signs out existing sessions.
+        </p>
+
+        <section class="panel">
+
+            <form id="password-form">
+
+                <div class="field-group">
+                    <label for="current-password">
+                        Current password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="current-password"
+                        required
+                        autocomplete="current-password">
+                </div>
+
+                <div class="field-group">
+                    <label for="new-password">
+                        New password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="new-password"
+                        required
+                        minlength="8"
+                        autocomplete="new-password">
+                </div>
+
+                <button
+                    type="submit"
+                    class="primary"
+                    id="change-btn">
+
+                    Change password
+
+                </button>
+
+                <p id="message" class="message"></p>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script>
+
+function toggleDropdown() {
+    document.getElementById('dropdown').classList.toggle('show');
+}
+
+async function loadUser() {
+
+    try {
+
+        const res = await fetch('/api/auth/me');
+
+        if (!res.ok) {
+            location.href = '/index.html';
+            return;
+        }
+
+        const user = await res.json();
+
+        document.getElementById('header-name').textContent =
+            user.fullname || 'Account holder';
+
+        document.getElementById('avatar').textContent =
+            (user.fullname || 'S').charAt(0).toUpperCase();
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+document.getElementById('password-form').addEventListener('submit', async (e) => {
+
+    e.preventDefault();
+
+    const currentPassword =
+        document.getElementById('current-password').value;
+
+    const newPassword =
+        document.getElementById('new-password').value;
+
+    const message = document.getElementById('message');
+    const button = document.getElementById('change-btn');
+
+    if (newPassword.length < 8) {
+        message.style.color = 'red';
+        message.textContent = 'New password must contain at least 8 characters.';
+        return;
+    }
+
+    if (currentPassword === newPassword) {
+        message.style.color = 'red';
+        message.textContent = 'New password must be different from current password.';
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = 'Updating...';
+
+    try {
+
+        const res = await fetch('/api/auth/change-password', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                currentPassword,
+                newPassword
+            })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            throw new Error(data.error || 'Password update failed.');
+        }
+
+        message.style.color = 'green';
+        message.textContent = 'Password changed successfully. Redirecting to login...';
+
+        document.getElementById('password-form').reset();
+
+        setTimeout(() => {
+            location.href = '/index.html';
+        }, 1800);
+
+    } catch (error) {
+
+        message.style.color = 'red';
+        message.textContent = error.message;
+
+        button.disabled = false;
+        button.textContent = 'Change password';
+
+    }
+
+});
+
+async function logout() {
+
+    await fetch('/api/auth/logout', {
+        method: 'POST'
+    });
+
+    location.href = '/index.html';
+}
+
+loadUser();
+
+</script>
+
+</body>
+</html>
